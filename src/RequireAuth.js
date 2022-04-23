@@ -32,7 +32,7 @@ function RequireAuth({ children }) {
     // than dropping them off on the home page.
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-  if(!user.emailVerified) {
+  if(user.providerData[0]?.providerId === 'password' && !user.emailVerified) {
     return(
       <div className="mt-5 d-block">
         <div className="verified_email py-5 px-4 bg-warning w-50 mx-auto rounded">

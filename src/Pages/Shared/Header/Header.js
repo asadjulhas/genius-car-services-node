@@ -34,8 +34,10 @@ const Header = () => {
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mx-auto">
       <CustomLink to='/'>Home</CustomLink>
-        <CustomLink to='/about'>About</CustomLink>
-        <CustomLink as={Link} to='home#services'>Services</CustomLink>
+        {/* <CustomLink to='/about'>About</CustomLink> */}
+        {/* <CustomLink as={Link} to='home#services'>Services</CustomLink> */}
+        <CustomLink to='/add-service'>Add Service</CustomLink>
+        <CustomLink to='/manage'>Manage</CustomLink>
         <CustomLink to='/account'>Account</CustomLink>
         {user ? '' : <CustomLink to='/register'>Register</CustomLink>}
         {user ? '' :  <CustomLink to='/login'>Login</CustomLink>}
