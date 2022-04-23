@@ -18,8 +18,10 @@ const ManageService = () => {
       })
       .then(res => res.json())
       .then(action => {
-        handleShow()
+        handleShow();
         console.log(action);
+        const remaingService = services.filter(service => service._id !== id);
+        setServices(remaingService)
       })
     }
   }
@@ -29,7 +31,7 @@ const ManageService = () => {
         <div className="container">
           <div className="row">
             {services.map((service) => (
-              <div key={service?._id} className="col-md-4 col-sm-6">
+              <div key={service?._id} className="col-lg-4 col-md-6 col-sm-6">
                 <Card className="mt-4" style={{ width: "18rem" }}>
                   <Card.Img variant="top" src={service?.img} />
                   <Card.Body>
