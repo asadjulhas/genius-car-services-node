@@ -1,7 +1,5 @@
 # Getting Started with Create React App
 
-Genius car Services [Live preview here](https://genius-car-services-f777e.firebaseapp.com/).
-
 ## Available Scripts
 
 In the project directory, you can run:
