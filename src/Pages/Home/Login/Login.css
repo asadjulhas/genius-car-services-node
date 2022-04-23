@@ -1,0 +1,109 @@
+
+.login_form {
+  background: #FFFFFF;
+  border: 1px solid #95A0A7;
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 450px;
+  height: 565px;
+  margin: 0 auto;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.login_form h3 {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 42px;
+  letter-spacing: 0.0025em;
+  color: #2A414F;
+  margin: 0;
+  margin: 30px 0;
+}
+form label {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 20px;
+	letter-spacing: 0.0015em;
+	color: #2A414F;
+	text-align: left;
+	width: 100%;
+	display: inline-block;
+	margin-left: 41px;
+	margin-bottom: 5px;
+}
+.login_form input:not([type=checkbox]) {
+  border: 1px solid rgba(149, 160, 167, 1);
+  border-radius: 5px;
+  width: 365px;
+  height: 35px;
+  padding-left: 15px;
+  margin-bottom: 19px;
+}
+.login_form input[type="checkbox"] {
+	border-radius: 3px;
+	width: 15px;
+	height: 15px;
+	padding-left: 0;
+	display: inline-block;
+}
+label.text-danger, label.text-success {
+	width: auto;
+	margin-left: 10px;
+}
+
+.form-check-label {
+  width: auto;
+  display: block;
+}
+.login_btn {
+  background: rgba(255, 153, 0, 0.3);
+  background: rgba(255, 153, 0, 0.3);
+  border: none;
+  width: 382px;
+  padding: 13px 0;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 25px;
+  letter-spacing: 0.0015em;
+  color: #0E161A;
+  border-radius: 5px;
+  margin-top: 25px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.login_form span {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 0.0025em;
+  color: #2A414F;
+}
+.login_form span a {
+  color: rgba(255, 153, 0, 1);
+  text-decoration: none;
+  margin-left: 5px;
+}
+.google_signin {
+  border: 1px solid rgba(149, 160, 167, 1);
+  width: 370px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 36px;
+}
+form span {
+	display: block;
+	padding: 0 24px;
+}

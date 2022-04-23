@@ -1,0 +1,32 @@
+
+.login_form.signup {
+  height: 625px;
+}
+.login_form.signup input {
+  margin-bottom: 13px;
+}
+.login_form.signup .login_btn {
+  margin-top: 10px;
+}
+.login_form.signup h3 {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+.error_message {
+	color: red !important;
+	padding: 0px 10px !important;
+}
+.success_message {
+  color: green !important;
+}
+.not_accept.form-check input {
+	border: 1px solid #f00;
+}
+.accept.form-check input {
+	border: 1px solid green;
+}
+
+button:disabled, button[disabled] {
+	background: #bfaaaa7d;
+	cursor: default;
+}
