@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CheckOut.css';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
@@ -8,6 +8,7 @@ import useSingleService from '../../hooks/useSingleService';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import axios from 'axios';
+import ModalALert from '../Modal/ModalALert';
 
 const CheckOut = () => {
   const {id} = useParams();
@@ -16,12 +17,21 @@ const CheckOut = () => {
   // Logget user
   const [user] = useAuthState(auth);
 
+   //Bootstrap Modal
+   const [show, setShow] = useState(false);
+   const handleClose = () => setShow(false);
+   const handleShow = () => setShow(true);
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = (order, e) => {
     order.productId = id;
+    order.price = service?.price;
     axios.post('http://localhost:5000/order', order)
-    .then(order => {
-      console.log(order)
+    .then(response => {
+      if(response.data.insertedId) {
+        handleShow();
+        e.target.reset();
+      }
+      console.log(response)
     })
   };
 
@@ -59,7 +69,7 @@ const CheckOut = () => {
       
       <input className='w-50 btn btn-primary' type="submit" value='Add service' />
     </form>
-
+    <ModalALert show={show} handleClose={handleClose} message="Order successfully place..!!!"/>
     </div>
   );
 };

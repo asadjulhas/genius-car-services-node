@@ -13,6 +13,7 @@ import RequireAuth from './RequireAuth';
 import AddService from './Pages/Home/Services/AddService';
 import ManageService from './Pages/Home/Services/ManageService';
 import CheckOut from './Pages/CheckOut/CheckOut';
+import Order from './Pages/Order/Order';
 
 
 
@@ -35,6 +36,11 @@ function App() {
             <ManageService/>
           </RequireAuth>
         }/>
+        <Route path='/order' element={
+          <RequireAuth>
+           <Order/>
+          </RequireAuth>
+        }/>
         <Route path='/checkout/:id' element={
           <RequireAuth>
             <CheckOut/>
@@ -42,11 +48,7 @@ function App() {
         }/>
         <Route path='/register' element={<Register/>} />
         <Route path='/login' element={<Login />}/>
-        <Route path='/service/:id' element={
-          <RequireAuth>
-        <ServiceDetails/>
-        </RequireAuth>
-        }/>
+        <Route path='/service/:id' element={<ServiceDetails/>}/>
         <Route path='/account' element={
         <RequireAuth>
         <Account/>

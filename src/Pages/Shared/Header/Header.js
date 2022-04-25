@@ -38,6 +38,7 @@ const Header = () => {
         {/* <CustomLink as={Link} to='home#services'>Services</CustomLink> */}
         <CustomLink to='/add-service'>Add Service</CustomLink>
         <CustomLink to='/manage'>Manage</CustomLink>
+        <CustomLink to='/order'>Order</CustomLink>
         <CustomLink to='/account'>Account</CustomLink>
         {user ? '' : <CustomLink to='/register'>Register</CustomLink>}
         {user ? '' :  <CustomLink to='/login'>Login</CustomLink>}
