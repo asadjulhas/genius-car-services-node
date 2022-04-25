@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Card, Modal } from "react-bootstrap";
 import useServices from "../../../hooks/useServices";
+import ModalALert from "../../Modal/ModalALert";
 
 const ManageService = () => {
   const [services, setServices] = useServices();
@@ -46,24 +47,7 @@ const ManageService = () => {
         </div>
       </div>
 
-      <>
-
-<Modal show={show} onHide={handleClose}>
-  <Modal.Header closeButton>
-    <Modal.Title>Action Success</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>Service successfully DELETED..!!!</Modal.Body>
-  <Modal.Footer>
-    <Button variant="secondary" onClick={handleClose}>
-      Close
-    </Button>
-    <Button variant="primary" onClick={handleClose}>
-      Save Changes
-    </Button>
-  </Modal.Footer>
-</Modal>
-</>
-
+      <ModalALert show={show} handleClose={handleClose} message="Service successfully DELETED..!!!"/>
     </div>
   );
 };

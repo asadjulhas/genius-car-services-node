@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './AddService.css'
 import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import ModalALert from '../../Modal/ModalALert';
 
 const AddService = () => {
 
@@ -59,25 +60,7 @@ const AddService = () => {
       <input className='w-50 btn btn-primary' type="submit" value='Add service' />
     </form>
       </div>
-
-      <>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Action Success</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Service successfully added..!!!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-
+<ModalALert show={show} handleClose={handleClose} message="Service successfully added..!!!"/>
     </div>
   );
 };
