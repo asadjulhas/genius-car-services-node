@@ -14,6 +14,7 @@ import AddService from './Pages/Home/Services/AddService';
 import ManageService from './Pages/Home/Services/ManageService';
 import CheckOut from './Pages/CheckOut/CheckOut';
 import Order from './Pages/Order/Order';
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -56,6 +57,7 @@ function App() {
         }/>
       </Routes>
       <Footer/>
+      <ToastContainer />
     </div>
   );
 }

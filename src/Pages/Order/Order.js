@@ -1,7 +1,10 @@
 import axios from 'axios';
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import PageTitle from '../../hooks/PageTitle';
 import './Order.css';
@@ -9,15 +12,26 @@ import './Order.css';
 const Order = () => {
   const [user] = useAuthState(auth);
 const [orders, setOrders] = useState([])
+const toLogin = useNavigate();
 useEffect(() => {
   
   const getOrders = async () => {
-    const {data} = await axios.get(`http://localhost:5000/order?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`
-      }
-    })
-    setOrders(data);
+    try {
+      const {data} = await axios.get(`http://localhost:5000/order?email=${user.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+      })
+      setOrders(data);
+    } catch (error) {
+  console.log(error.response.status);
+  if(error.response.status === 401 || error.response.status === 403) {
+    localStorage.removeItem('accessToken')
+    toast('Sorry, you dont have access');
+    signOut(auth);
+    toLogin('/login')
+  }
+    }
   }
   getOrders();
 },[])

@@ -81,7 +81,7 @@ const Login = () => {
           <span>New to genius-car-services? <Link to='/register'>Create New Account</Link></span>
           <p className='m-0'>or</p>
         </form>
-        <ToastContainer />
+        
         <button className='btn-warning btn-sm mb-2' onClick={SendPasswordReset}>Reset password</button><br />
         <GoogleLogin/>
       </div>
