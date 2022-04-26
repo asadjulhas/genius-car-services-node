@@ -6,7 +6,6 @@ import ModalALert from "../../Modal/ModalALert";
 const ManageService = () => {
   const [services, setServices] = useServices();
   //Bootstrap Modal
-  
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

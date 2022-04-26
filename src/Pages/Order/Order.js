@@ -18,7 +18,7 @@ let keys = []
 for(const key of orders) {
   keys.push(key.productId)
 }
-console.log(keys)
+// console.log(keys)
   return (
     <div>
       <p className='pt-3'>Total order: {orders.length}</p>
