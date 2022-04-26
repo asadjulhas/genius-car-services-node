@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -9,9 +10,16 @@ const Order = () => {
   const [user] = useAuthState(auth);
 const [orders, setOrders] = useState([])
 useEffect(() => {
-  fetch(`http://localhost:5000/order?email=${user.email}`)
-  .then(res => res.json())
-  .then(orders => setOrders(orders))
+  
+  const getOrders = async () => {
+    const {data} = await axios.get(`http://localhost:5000/order?email=${user.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+    setOrders(data);
+  }
+  getOrders();
 },[])
 
 let keys = []
