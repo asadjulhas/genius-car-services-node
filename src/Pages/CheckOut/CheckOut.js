@@ -2,25 +2,22 @@ import React, { useState } from 'react';
 import './CheckOut.css';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PageTitle from '../../hooks/PageTitle';
 import useSingleService from '../../hooks/useSingleService';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import axios from 'axios';
-import ModalALert from '../Modal/ModalALert';
+import { toast } from 'react-toastify';
 
 const CheckOut = () => {
   const {id} = useParams();
   const [service] = useSingleService(id);
+  const nagivate = useNavigate();
 
   // Logget user
   const [user] = useAuthState(auth);
 
-   //Bootstrap Modal
-   const [show, setShow] = useState(false);
-   const handleClose = () => setShow(false);
-   const handleShow = () => setShow(true);
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = (order, e) => {
     order.productId = id;
@@ -28,8 +25,9 @@ const CheckOut = () => {
     axios.post('https://salty-ravine-90360.herokuapp.com/order', order)
     .then(response => {
       if(response.data.insertedId) {
-        handleShow();
+        toast('Order successfully place..!!!');
         e.target.reset();
+        nagivate('/order');
       }
       console.log(response)
     })
@@ -52,7 +50,7 @@ const CheckOut = () => {
 
       <Form.Group className="mb-3">
     <Form.Label>Service name</Form.Label>
-      <input type='text' value={service?.name} readOnly className='form-control'  {...register("productId", { required: true })} placeholder='Enter service name' />
+      <input type='text' value={service?.name} readOnly className='form-control'  {...register("productId", { required: false })} placeholder='Enter service name' />
       </Form.Group>
 
       <Form.Group className="mb-3">
@@ -65,11 +63,10 @@ const CheckOut = () => {
       <input type='text' className='form-control' {...register("phone", { required: true })} placeholder='Enter your Phone' />
       </Form.Group>
 
-      {(errors.name || errors.email || errors.address || errors.productId  || errors.phone) && <span>This field is required</span>}
+      {(errors.name || errors.email || errors.address || errors.phone) && <span>This field is required</span>}
       
       <input className='w-50 btn btn-primary' type="submit" value='Add service' />
     </form>
-    <ModalALert show={show} handleClose={handleClose} message="Order successfully place..!!!"/>
     </div>
   );
 };
