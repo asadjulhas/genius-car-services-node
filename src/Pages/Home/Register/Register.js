@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import './Register.css'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { useAuthState, useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import GoogleLogin from '../Login/GoogleLogin';
 import { Spinner } from 'react-bootstrap';
+import useToken from '../../../hooks/useToken';
 
 const Register = () => {
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   // Checkbox state
   const[agree, setAgree] = useState(false)
 
   const loginSuccesss = useNavigate()
   const [userr] = useAuthState(auth);
-
+  const [token] = useToken(userr)
  
  const [signError, setError] = useState('') 
   const [
@@ -78,6 +82,10 @@ const loginSuccess = useNavigate()
       setError(error?.message)
     )
     
+  }
+
+  if(token) {
+    navigate(from, { replace: true });
   }
 
  

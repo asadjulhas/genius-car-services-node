@@ -8,6 +8,7 @@ import { Spinner } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import useToken from '../../../hooks/useToken';
 
 const Login = () => {
   let errorElement;
@@ -16,10 +17,9 @@ const Login = () => {
   let from = location.state?.from?.pathname || "/";
 
   const [userr] = useAuthState(auth);
-  if(userr) {
-    // navigate(from, { replace: true });
-  }
- 
+  
+  const [token] = useToken(userr);
+  
   const [
     signInWithEmailAndPassword,
     user,
@@ -35,19 +35,8 @@ const Login = () => {
     const password = passwordRef.current.value;
 
     await signInWithEmailAndPassword(email, password);
-    const {data} = await axios.post('https://salty-ravine-90360.herokuapp.com/login', {email})
-  localStorage.setItem('accessToken', data.accessToken);
-  navigate(from, { replace: true });
   }
-  if(userr) {
-
-  //   const localUser = localStorage.getItem('accessToken');
-  //   const userEmail = userr.email;
-  //   if(!localUser) {
-  //     const {data} = await axios.post('https://salty-ravine-90360.herokuapp.com/login', {userEmail})
-  // localStorage.setItem('accessToken', data.accessToken);
-  //   }
-
+  if(token) {
     navigate(from, { replace: true });
   }
   // Forget Password
