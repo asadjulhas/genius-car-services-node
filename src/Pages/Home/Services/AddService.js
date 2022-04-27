@@ -13,7 +13,7 @@ const AddService = () => {
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = (data, e) => {
-    fetch('http://localhost:5000/service', {
+    fetch('https://salty-ravine-90360.herokuapp.com/service', {
       method: 'POST',
       headers: {
         'content-Type': 'application/json',

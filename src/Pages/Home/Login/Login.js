@@ -35,11 +35,19 @@ const Login = () => {
     const password = passwordRef.current.value;
 
     await signInWithEmailAndPassword(email, password);
-    const {data} = await axios.post('http://localhost:5000/login', {email})
+    const {data} = await axios.post('https://salty-ravine-90360.herokuapp.com/login', {email})
   localStorage.setItem('accessToken', data.accessToken);
   navigate(from, { replace: true });
   }
   if(userr) {
+
+  //   const localUser = localStorage.getItem('accessToken');
+  //   const userEmail = userr.email;
+  //   if(!localUser) {
+  //     const {data} = await axios.post('https://salty-ravine-90360.herokuapp.com/login', {userEmail})
+  // localStorage.setItem('accessToken', data.accessToken);
+  //   }
+
     navigate(from, { replace: true });
   }
   // Forget Password

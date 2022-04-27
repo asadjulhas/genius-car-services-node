@@ -13,7 +13,7 @@ const ManageService = () => {
   const handleDelete = (id) => {
     const confirmDelete = window.confirm('Sure, are you want to delete?');
     if(confirmDelete){
-      fetch(`http://localhost:5000/delete/${id}`, {
+      fetch(`https://salty-ravine-90360.herokuapp.com/delete/${id}`, {
         method: 'DELETE'
       })
       .then(res => res.json())

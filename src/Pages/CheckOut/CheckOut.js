@@ -25,7 +25,7 @@ const CheckOut = () => {
   const onSubmit = (order, e) => {
     order.productId = id;
     order.price = service?.price;
-    axios.post('http://localhost:5000/order', order)
+    axios.post('https://salty-ravine-90360.herokuapp.com/order', order)
     .then(response => {
       if(response.data.insertedId) {
         handleShow();
