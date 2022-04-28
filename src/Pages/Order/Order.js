@@ -12,6 +12,7 @@ import './Order.css';
 const Order = () => {
   const [user] = useAuthState(auth);
 const [orders, setOrders] = useState([])
+const [orderItems, setOrderItems] = useState([]);
 const toLogin = useNavigate();
 useEffect(() => {
   
@@ -36,21 +37,40 @@ useEffect(() => {
   getOrders();
 },[])
 
-let keys = []
-for(const key of orders) {
-  keys.push(key.productId)
+let keys = [];
+
+useEffect(() => {
+const orderKeys = async () => {
+   for(const key of orders) {
+    await keys.push(key.productId)
+  }
+  
+  
+    const getorderItem = async () => {
+        await axios.post('https://salty-ravine-90360.herokuapp.com/orderitem', keys)
+        .then((response) => {
+          setOrderItems(response?.data)
+        })
+    }
+ 
+
+  getorderItem();
 }
-// console.log(keys)
+orderKeys();
+},[orders])
+
   return (
     <div>
       <p className='pt-3'>Total order: {orders.length}</p>
       <PageTitle title='Orders'/>
-      {orders.map(order => 
+      {orderItems.map(order => 
         
         <Card key={order._id} className='w-50 mx-auto mb-4'>
-  <Card.Header as="h5">Order Id: {order._id}</Card.Header>
+  <Card.Header as="h5">{order.name}</Card.Header>
   <Card.Body>
-    <Card.Title>Product Id: {order?.productId}</Card.Title>
+    <Card.Title>
+      <img src={order.img} alt="" />
+    </Card.Title>
     <Card.Text>
     ${order?.price}
     </Card.Text>
