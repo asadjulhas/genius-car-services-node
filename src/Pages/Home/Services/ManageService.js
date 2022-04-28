@@ -1,30 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Modal } from "react-bootstrap";
+import { toast } from "react-toastify";
 import useServices from "../../../hooks/useServices";
+import DeleteModal from "../../Modal/DeleteModal";
 import ModalALert from "../../Modal/ModalALert";
 
 const ManageService = () => {
   const [services, setServices] = useServices();
+  const [deleteSer, setDeleteSer] = useState(false)
+  const [productID, setproductID] = useState('');
+  const [productTitle, setProductTitle] = useState('');
   //Bootstrap Modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleDelete = (id) => {
-    const confirmDelete = window.confirm('Sure, are you want to delete?');
-    if(confirmDelete){
-      fetch(`https://salty-ravine-90360.herokuapp.com/delete/${id}`, {
+  const handleDelete = (id, title) => {
+    // const confirmDelete = window.confirm('Sure, are you want to delete?');
+    handleShow();
+    setproductID(id)
+    setProductTitle(title)
+  }
+
+  useEffect(() => {
+      
+    if(deleteSer){
+      setShow(false);
+      setDeleteSer(false);
+      fetch(`https://salty-ravine-90360.herokuapp.com/delete/${productID}`, {
         method: 'DELETE'
       })
       .then(res => res.json())
       .then(action => {
-        handleShow();
-        console.log(action);
-        const remaingService = services.filter(service => service._id !== id);
+        const remaingService = services.filter(service => service._id !== productID);
         setServices(remaingService)
       })
+      toast('Service successfully Deleted..!!!')
     }
-  }
+
+  },[deleteSer])
+  // console.log(deleteSer)
   return (
     <div className="">
       <div className="s_service">
@@ -37,7 +52,7 @@ const ManageService = () => {
                   <Card.Body>
                     <Card.Title>{service?.name}</Card.Title>
                     <Button className="btn-sm" variant="primary">Edit</Button>&nbsp;
-                    <Button onClick={()=>handleDelete(service?._id)} className="btn-sm" variant="danger">Delete</Button>
+                    <Button onClick={()=>handleDelete(service?._id, service?.name)} className="btn-sm" variant="danger">Delete</Button>
                   </Card.Body>
                 </Card>
               </div>
@@ -46,7 +61,7 @@ const ManageService = () => {
         </div>
       </div>
 
-      <ModalALert show={show} handleClose={handleClose} message="Service successfully DELETED..!!!"/>
+      <DeleteModal show={show} handleClose={handleClose} setDeleteSer={setDeleteSer} title={productTitle} message="Are you sure you want to delete?"/>
     </div>
   );
 };

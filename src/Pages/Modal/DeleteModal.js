@@ -1,23 +1,23 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
-const ModalALert = ({show, handleClose, message}) => {
+const DeleteModal = ({show, handleClose, title, message, setDeleteSer}) => {
   return (
     <Modal centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Action Success</Modal.Title>
+          <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{message}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            No
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="primary" onClick={()=>setDeleteSer(true)}>
+           Delete
           </Button>
         </Modal.Footer>
       </Modal>
   );
 };
 
-export default ModalALert;
+export default DeleteModal;
